@@ -1,0 +1,35 @@
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+</head>
+
+<body style="background-color: rgb(106, 195, 255); font-family: sans-serif">
+    <div style="margin: 20px">
+        <div class="row">
+            <span class="col-sm-12"><h4><strong>Cálculo</strong></h4></span>
+            <input class="col-sm-8 form-control" id="calculo" type="text"></input>
+            <button class="col-sm-4 btn btn-primary" onclick="calc()">Calc!</button>
+        </div>
+
+        <div class="row">
+            <span class="col-sm-12"><h4><strong>Resposta</strong></h4></span><br>
+            <input class="col-sm-12 form-control" id="resposta" type="text"></input>
+        </div>
+    </div>
+
+    <script>
+        function calc() {
+            var calculo = document.getElementById("calculo").value
+            fetch("/api?cmd=" + encodeURIComponent(calculo)).then(function(response) {
+                response.text().then(function(result) {
+                    document.getElementById("resposta").value = result
+                })
+            })
+        }
+    </script>
+</body>
+
+</html>
